@@ -5,15 +5,28 @@ const mongoose = require("mongoose");
 const date = require(__dirname + "/date.js");
 const _ = require("lodash");
 
-const app = express();
 
+const app = express();
+require('dotenv').config();
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //Connecting mongodb with app
-mongoose.connect('mongodb://127.0.0.1:27017/todolistDB');
+// mongoose.connect('mongodb://127.0.0.1:27017/todolistDB');
+
+mongoose.connect(`mongodb+srv://Admin:${process.env.ADMIN_PASSWORD}@cluster0.sdwodvq.mongodb.net/todolistDB?retryWrites=true&w=majority`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+  .then(() => {
+    console.log('Connected to MongoDB Atlas');
+  })
+  .catch((err) => {
+    console.log('Error connecting to MongoDB Atlas: ', err);
+  });
+
 
 //Schema for our list
 const itemSchema = {
@@ -123,11 +136,11 @@ app.post("/delete", async function (req, res) {
     // console.log("Successfully deleted checked item.");
     res.redirect("/");
   } else {
-    await List.findOneAndUpdate({name: listName},{$pull: {items: {_id: checkedID}}});
+    await List.findOneAndUpdate({ name: listName }, { $pull: { items: { _id: checkedID } } });
     res.redirect("/" + listName);
   }
 });
 
-app.listen(port, function() {
+app.listen(port, function () {
   console.log(`Server started on port ${port}`);
 });
