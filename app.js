@@ -110,18 +110,28 @@ app.post("/", async function (req, res) {
   const listName = req.body.list;
   const day = date.getDate();
 
+
+
   const newItem = new Item({
     name: itemName
   });
 
   if (listName == day) {
-    newItem.save();
-    res.redirect("/");
+    if (itemName == "") {
+      res.redirect("/");
+    } else {
+      newItem.save();
+      res.redirect("/");
+    }
   } else {
-    const foundList = await List.findOne({ name: listName });
-    foundList.items.push(newItem);
-    foundList.save();
-    res.redirect("/" + listName);
+    if (itemName == "") {
+      res.redirect("/" + listName);
+    } else {
+      const foundList = await List.findOne({ name: listName });
+      foundList.items.push(newItem);
+      foundList.save();
+      res.redirect("/" + listName);
+    }
   }
 });
 
