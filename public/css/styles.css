@@ -1,4 +1,5 @@
 html {
+  position: relative;
   background-color: #E4E9FD;
   background-image: -webkit-linear-gradient(65deg, #A683E3 50%, #E4E9FD 50%);
   min-height: 1000px;
@@ -8,13 +9,14 @@ html {
 h1 {
   color: #fff;
   padding: 10px;
+  text-align: center;
 }
 
 .box {
   max-width: 400px;
   margin: 50px auto;
   background: white;
-  border-radius: 5px;
+  border-radius: 10px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
 
@@ -66,6 +68,9 @@ button {
   font-size: 30px;
   padding-bottom: 6px;
   border-width: 0;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 input[type="text"] {
@@ -76,7 +81,11 @@ input[type="text"] {
   background: transparent;
   font-size: 20px;
   font-weight: 200;
-  width: 313px;
+  width: 100%;
+  max-width: 313px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
 }
 
 input[type="text"]:focus {
@@ -90,7 +99,35 @@ input[type="text"]:focus {
 }
 
 footer {
-  color: white;
   color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px 0;
   text-align: center;
+}
+
+/* Mobile styles */
+@media only screen and (max-width: 600px) {
+  .box {
+    max-width: 100%;
+    margin: 20px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+
+  button {
+    font-size: 24px;
+    min-height: 60px;
+    width: 60px;
+    padding-bottom: 0;
+  }
+
+  input[type="text"] {
+    height: 50px;
+    font-size: 18px;
+  }
 }
