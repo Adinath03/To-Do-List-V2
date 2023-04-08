@@ -1,5 +1,4 @@
-//jshint esversion:6
-
+const port = process.env.PORT || 3000;
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -129,6 +128,6 @@ app.post("/delete", async function (req, res) {
   }
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+app.listen(port, function() {
+  console.log(`Server started on port ${port}`);
 });
