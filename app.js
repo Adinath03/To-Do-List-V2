@@ -120,7 +120,7 @@ app.post("/", async function (req, res) {
     if (itemName == "") {
       res.redirect("/");
     } else {
-      newItem.save();
+      await newItem.save();
       res.redirect("/");
     }
   } else {
@@ -129,7 +129,7 @@ app.post("/", async function (req, res) {
     } else {
       const foundList = await List.findOne({ name: listName });
       foundList.items.push(newItem);
-      foundList.save();
+      await foundList.save();
       res.redirect("/" + listName);
     }
   }
