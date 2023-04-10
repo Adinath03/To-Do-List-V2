@@ -16,6 +16,7 @@ app.use(express.static("public"));
 //Connecting mongodb with app
 // mongoose.connect('mongodb://127.0.0.1:27017/todolistDB');
 
+//connectin app with mongodb
 mongoose.connect(`mongodb+srv://Admin:${process.env.ADMIN_PASSWORD}@cluster0.sdwodvq.mongodb.net/todolistDB?retryWrites=true&w=majority`, {
   useNewUrlParser: true,
   useUnifiedTopology: true
